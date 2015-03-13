@@ -37,7 +37,7 @@ def visualize(A):
     f.show()
     
 
-def loadtxt2dic(filename):
+def loadtxt2dic(filename, output_type='matrix'):
     """
     Loads text file of key:value pairs into a dictionary.  
     Usage notes:
@@ -48,10 +48,17 @@ def loadtxt2dic(filename):
     -Keys for strings should start with 'STR'
     -A matrix/scalar are stored floats ONLY if the text has a decimal
     
+    Parameters
+    ----------
+    filename : string
+               Path to input text file
+    output_type = {'ndarray', 'matrix'} optional
+                  Conversion type for array-like entries.  Default is 'matrix'
+
     """
-    dic = {}
+   dic = {}
     infile = open(filename,'r')
-    
+   
     for line in infile:
 
         # remove extra spaces
@@ -71,6 +78,10 @@ def loadtxt2dic(filename):
             
         else: 
             value = matrix(value)
+            # Note, convert to matrix first since the numpy.matrix
+            # can handle conversion of strings (e.g. ' [1, 2]')
+            if output_type == 'ndarray':
+                value = array(value).squeeze()
             
             # Save as scalar if value is a scalar
             if value.size == 1:
