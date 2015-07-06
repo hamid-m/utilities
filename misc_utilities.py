@@ -188,4 +188,38 @@ def count_lines(filepath, print_result=False):
     
     return cnt
 
+def data_path_list(DATA_PATH, print_summary=False):
+    """
+    This function returns a list of absolute paths to various files located
+    inside a parent folder with multiple subfolders.  For example:
+    
+    DATA_PATH
+        - readme.txt
+        - DATA FOLDER 1
+            -dataA.csv
+        - DATA FODLER 2
+            -dataB.csv
+            -dataC.mat
+            -dataD.txt
+            
+    This method will return a list of paths to all files inside the subfolders.
+    Namely, dataA through D.  Any files inside the top directory will be 
+    skipped.  Hence, readme.txt is ignored.
+    
+    Returns
+    -------
+    
+    List of paths  [[<folder1>, <filename1>, <absolutepath1>],
+                    [<folder2>, <filename2>, <absolutepath2>],
+                    etc...]
+                    
+    A sample entry might be: [Control_Laws, flight1.mat, /abs/path/flight1.mat]
+    
+    This was taken from aemuav_utilities.py and moved here.
+    November 25, 2013
+    Hamid
+    """
+    dir_list = os.listdir(DATA_PATH)
+    
+    return_data = []
 
