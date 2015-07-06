@@ -22,19 +22,22 @@ def circle(x0,y0,r,num_points=100):
 
 def visualize(A):
     """
-    Visualize or print a given variable in a meaningful manner
+    Visualize absolute value of A so as to see matrix structure.
     """
     
     # Matrix/Array
     f = plt.figure()
     ax = f.add_subplot(111)
-    ax.pcolor(array(A), edgecolor='w')
+    #ax.pcolor(np.array(A), edgecolor='w')
+    ax.pcolormesh(np.abs(A), cmap=plt.cm.gray_r, vmin=0, vmax=3*np.std(J))
+    ax.set_xlim([0, A.shape[1]])
+    ax.set_ylim([0, A.shape[0]])
     ax.invert_yaxis() # set origin to upper left corner
     ax.xaxis.set_ticks_position('top') # move x-axis tick to top of graph
     ax.set_xlabel('C O L U M N S')
     ax.set_ylabel('R O W S')
     
-    f.show()
+    plt.show()
     
 
 def loadtxt2dic(filename, output_type='matrix'):
